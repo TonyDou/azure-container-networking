@@ -590,7 +590,7 @@ func addIpv6SnatRule(extIf *externalInterface, nwInfo *NetworkInfo) error {
 	log.Printf("[net] Adding ipv6 snat rule")
 	for _, ipAddr := range extIf.IPAddresses {
 		if ipAddr.IP.To4() == nil {
-			if err := epcommon.AddSnatRule("", ipAddr.IP); err != nil {
+			if err := epcommon.AddSnatRule("! -s fd00::/8", ipAddr.IP); err != nil {
 				return err
 			}
 		}
